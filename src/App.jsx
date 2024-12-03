@@ -1,12 +1,13 @@
 import React, { useEffect } from "react";
-import styled from "styled-components";
+import styled, { ThemeProvider } from "styled-components";
 import { Link, useLocation, useNavigate } from "react-router-dom";
 import { Outlet } from "react-router-dom"; // Assuming you're using Outlet for nested routes
 import "./App.css";
+import theme from "./theme";
 
 // Header Component
 const Header = styled.header`
-  background-color: #2d3a3f;
+  background-color: ${props => props.theme.darkskyblue};
   color: white;
   padding: 20px 40px;
   display: flex;
@@ -100,7 +101,7 @@ const App = () => {
   }, [location]);
 
   return (
-    <div>
+    <ThemeProvider theme={theme}>
       <Header>
         <Logo onClick={() => navigate("/")}>
           <LogoImg
@@ -127,7 +128,7 @@ const App = () => {
           <Outlet context={{ setErrorMessage: setErrorMessage }} />
         </MainContent>
       </Content>
-    </div>
+    </ThemeProvider>
   );
 };
 
